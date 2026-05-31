@@ -1,10 +1,6 @@
-// Botão reutilizável com suporte a duas variantes (primário e secundário),
-// estado de carregamento (exibe spinner) e estado desabilitado.
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet, ActivityIndicator } from 'react-native';
 
-// Props: titulo (texto do botão), onPress (ação ao clicar),
-// variante ('primario'|'secundario'), carregando (boolean), desabilitado (boolean)
 export default function BotaoCustom({ titulo, onPress, variante = 'primario', carregando = false, desabilitado = false }) {
   const estiloContainer = [
     styles.botao,

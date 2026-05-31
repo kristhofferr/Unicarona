@@ -1,7 +1,4 @@
 
-// Tela de busca de caronas com filtros por origem, destino, horário e dia da semana.
-// Os resultados são atualizados automaticamente conforme o usuário digita.
-// Permite confirmar uma carona diretamente pelo modal de detalhes.
 import React, { useState, useEffect } from 'react';
 import {
   View,

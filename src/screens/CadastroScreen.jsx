@@ -1,7 +1,4 @@
 
-// Tela de cadastro de novo usuário no Unicarona.
-// Valida e-mail institucional, força mínimo de 6 caracteres na senha
-// e confirma que as senhas digitadas são iguais antes de criar a conta.
 import React, { useState } from 'react';
 import {
   View,
@@ -62,7 +59,6 @@ export default function CadastroScreen({ navigation }) {
       return;
     }
 
-    // simula cadastro e já loga o usuário
     login({
       nome,
       email,

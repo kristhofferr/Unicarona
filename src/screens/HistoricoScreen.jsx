@@ -1,6 +1,3 @@
-// Tela de histórico de caronas concluídas pelo usuário.
-// Exibe as caronas em ordem cronológica inversa (mais recentes primeiro)
-// junto com a avaliação (estrelas) dada a cada motorista.
 import React from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';

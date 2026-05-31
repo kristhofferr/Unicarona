@@ -1,6 +1,3 @@
-// Tela de edição do perfil do usuário.
-// Permite alterar nome, curso, e-mail institucional e senha.
-// A exclusão de conta é feita via modal de confirmação com aviso de ação irreversível.
 import React, { useState } from 'react';
 import {
   View,

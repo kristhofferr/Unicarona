@@ -1,6 +1,3 @@
-// Modal global de avaliação por estrelas exibido após a conclusão de uma carona.
-// Aparece automaticamente quando o contexto tem uma avaliação pendente.
-// O usuário escolhe de 1 a 5 estrelas ou pula a avaliação.
 import React, { useState } from 'react';
 import { Modal, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';

@@ -1,7 +1,3 @@
-// Tela para o usuário oferecer uma carona.
-// Funciona em 2 etapas: (1) preenchimento do formulário com dados da rota,
-// (2) visualização da rota no mapa antes de confirmar a publicação.
-// Geocodifica os endereços via Nominatim (OpenStreetMap) e traça a rota com OSRM.
 import React, { useState } from 'react';
 import {
   View, Text, TextInput, StyleSheet, ScrollView,

@@ -1,5 +1,3 @@
-// Tela de configurações do aplicativo.
-// Permite alternar entre tema claro e escuro e definir o raio de busca de caronas (em km).
 import React, { useState } from 'react';
 import {
   View,

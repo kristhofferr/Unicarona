@@ -1,6 +1,3 @@
-// Overlay global que exibe notificações em tempo real no topo da tela.
-// Cada notificação anima sua entrada com efeito spring vindo de cima
-// e some automaticamente após 4 segundos ou ao clicar no X.
 import React, { useEffect, useRef } from 'react';
 import { Animated, Text, StyleSheet, TouchableOpacity, View, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';

@@ -1,16 +1,12 @@
 
-// Contexto global do aplicativo Unicarona.
-// Gerencia todo o estado compartilhado: usuário logado, lista de caronas,
-// notificações, avaliações, histórico, chat, tema e progresso de horas complementares.
 import React, { createContext, useContext, useState } from 'react';
 
 const CaronaContext = createContext();
 
-// Constantes do sistema de horas complementares
-export const CARONAS_POR_SEMESTRE = 20;  // Caronas necessárias para completar 1 semestre
-export const HORAS_POR_SEMESTRE = 10;    // Horas complementares ganhas por semestre completo
-export const META_SEMANAL = 2;           // Meta de caronas por semana
-export const MAX_SEMESTRES = 5;          // Total de semestres possíveis no programa
+export const CARONAS_POR_SEMESTRE = 20;
+export const HORAS_POR_SEMESTRE = 10;
+export const META_SEMANAL = 2;
+export const MAX_SEMESTRES = 5;
 
 const temas = {
   claro: {

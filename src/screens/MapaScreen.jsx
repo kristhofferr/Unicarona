@@ -1,6 +1,3 @@
-// Tela de mapa interativo com a localização dos motoristas disponíveis.
-// Solicita permissão de localização do dispositivo e centraliza o mapa
-// na posição do usuário. Ao clicar em um marcador, exibe a rota da carona.
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ActivityIndicator, TouchableOpacity } from 'react-native';
 import MapView, { Marker, Polyline } from 'react-native-maps';

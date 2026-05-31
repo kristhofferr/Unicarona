@@ -1,7 +1,4 @@
 
-// Tela de login do aplicativo Unicarona.
-// Valida e-mail institucional (deve terminar em .edu.br) e RA (8 dígitos numéricos).
-// Após validação bem-sucedida, autentica o usuário via contexto global.
 import React, { useState } from 'react';
 import {
   View,

@@ -1,13 +1,8 @@
-// Cabeçalho padrão das telas internas do app.
-// Exibe título centralizado, botão de voltar opcional à esquerda
-// e área para ação opcional à direita.
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
-// Props: titulo (string), mostrarVoltar (boolean), acaoDireita (função que retorna JSX),
-// corFundo, corTexto, corBorda (strings de cor para temas claro/escuro)
 export default function Header({ titulo, mostrarVoltar = false, acaoDireita, corFundo, corTexto, corBorda }) {
   const navigation = useNavigation();
 

@@ -1,7 +1,3 @@
-// Tela de perfil do usuário logado.
-// Exibe informações pessoais, progresso de horas complementares por semestre,
-// atalhos para editar perfil, ver histórico e acessar configurações.
-// Gerencia logout e resgate de horas complementares via modais customizados.
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Modal } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
@@ -39,9 +35,7 @@ export default function PerfilScreen({ navigation }) {
     setFeedback(prev => ({ id: prev.id + 1, visivel: true, mensagem, tipo }));
   }
 
-  // Cada carona do tipo 'horas' equivale a 0,5 hora complementar
   const horasSemestre = progressoHoras.caronasSemestre * 0.5;
-  // Percentual do semestre concluído, limitado a 100%
   const pctSemestre = Math.min(1, progressoHoras.caronasSemestre / CARONAS_POR_SEMESTRE);
   const pctSemana = Math.min(1, progressoHoras.caronasSemana / META_SEMANAL);
   const semestreConcluido = progressoHoras.semestreAtual > MAX_SEMESTRES;

@@ -1,6 +1,3 @@
-// Tela de chat entre o passageiro e o motorista de uma carona confirmada.
-// As mensagens do usuário aparecem à direita (balão vermelho) e as do
-// motorista à esquerda (balão cinza). O motorista responde automaticamente.
 import React, { useState, useRef, useEffect } from 'react';
 import {
   View,

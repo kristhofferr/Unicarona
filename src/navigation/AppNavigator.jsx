@@ -1,6 +1,3 @@
-// Configura toda a navegação do aplicativo com React Navigation (Stack).
-// Se o usuário está autenticado, exibe as telas principais (abas + detalhes).
-// Se não está autenticado, exibe apenas Login e Cadastro.
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';

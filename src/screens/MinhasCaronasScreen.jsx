@@ -1,7 +1,4 @@
 
-// Tela "Reservas" do aplicativo — exibe as caronas confirmadas pelo usuário.
-// Permite cancelar uma carona através de modal de confirmação,
-// ou acessar o chat com o motorista de cada carona.
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Modal } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';

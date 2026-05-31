@@ -1,8 +1,4 @@
 
-// Tela principal (Home) do aplicativo Unicarona.
-// Exibe a lista de caronas disponíveis com filtro por dia da semana,
-// botões de acesso rápido para buscar/oferecer carona e ver o mapa.
-// Permite confirmar uma carona através de um modal detalhado.
 import React, { useState } from 'react';
 import {
   View,
