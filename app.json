@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Caronipar",
-    "slug": "Caronipar",
+    "name": "Unicarona",
+    "slug": "unicarona",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -10,15 +10,16 @@
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#1a1a2e"
     },
     "ios": {
       "supportsTablet": true
     },
     "android": {
+      "package": "com.unicarona.app",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#1a1a2e"
       },
       "edgeToEdgeEnabled": true
     },
