@@ -1,3 +1,5 @@
+// Dados estáticos de motoristas de exemplo exibidos na tela de mapa.
+// Cada objeto representa um motorista com informações de veículo, rota e avaliação.
 export const motoristas = [
   {
     id: 1,

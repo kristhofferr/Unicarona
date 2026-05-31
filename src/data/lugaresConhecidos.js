@@ -1,4 +1,5 @@
-// Coordenadas verificadas de locais comuns em Francisco Beltrão - PR
+// Coordenadas verificadas de locais comuns em Francisco Beltrão - PR.
+// Usada para geocodificação local sem precisar de API externa quando o nome é reconhecido.
 export const lugaresConhecidos = [
   { nome: 'UNIPAR', latitude: -26.0920, longitude: -53.0516 },
   { nome: 'Unipar', latitude: -26.0920, longitude: -53.0516 },
@@ -19,11 +20,15 @@ export const lugaresConhecidos = [
   { nome: 'Padre Ulrico', latitude: -26.0750, longitude: -53.0620 },
 ];
 
+// Busca um local pelo nome exato (sem diferenciação de acentos ou maiúsculas).
+// Retorna o objeto com latitude/longitude ou null se não encontrado.
 export function buscarLugarConhecido(texto) {
   const textoNorm = normalizarTexto(texto);
   return lugaresConhecidos.find(l => normalizarTexto(l.nome) === textoNorm) ?? null;
 }
 
+// Remove acentos, converte para minúsculas e elimina espaços extras.
+// Utilizada para comparações de texto insensíveis a acentuação.
 export function normalizarTexto(texto) {
   return texto
     .toLowerCase()

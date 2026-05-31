@@ -1,3 +1,6 @@
+// Modal global de avaliação por estrelas exibido após a conclusão de uma carona.
+// Aparece automaticamente quando o contexto tem uma avaliação pendente.
+// O usuário escolhe de 1 a 5 estrelas ou pula a avaliação.
 import React, { useState } from 'react';
 import { Modal, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
@@ -7,14 +10,17 @@ export default function AvaliacaoOverlay() {
   const { avaliacaoPendente, avaliarCarona, dispensarAvaliacao } = useCarona();
   const [notaSelecionada, setNotaSelecionada] = useState(0);
 
+  // Não renderiza nada se não houver avaliação pendente
   if (!avaliacaoPendente) return null;
 
+  // Registra a nota no contexto e limpa a seleção local
   function handleAvaliar() {
     if (notaSelecionada === 0) return;
     avaliarCarona(avaliacaoPendente.id, notaSelecionada);
     setNotaSelecionada(0);
   }
 
+  // Descarta a avaliação sem registrar nota
   function handlePular() {
     dispensarAvaliacao();
     setNotaSelecionada(0);

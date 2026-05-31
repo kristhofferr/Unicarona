@@ -1,12 +1,16 @@
 
+// Contexto global do aplicativo Unicarona.
+// Gerencia todo o estado compartilhado: usuário logado, lista de caronas,
+// notificações, avaliações, histórico, chat, tema e progresso de horas complementares.
 import React, { createContext, useContext, useState } from 'react';
 
 const CaronaContext = createContext();
 
-export const CARONAS_POR_SEMESTRE = 20;
-export const HORAS_POR_SEMESTRE = 10;
-export const META_SEMANAL = 2;
-export const MAX_SEMESTRES = 5;
+// Constantes do sistema de horas complementares
+export const CARONAS_POR_SEMESTRE = 20;  // Caronas necessárias para completar 1 semestre
+export const HORAS_POR_SEMESTRE = 10;    // Horas complementares ganhas por semestre completo
+export const META_SEMANAL = 2;           // Meta de caronas por semana
+export const MAX_SEMESTRES = 5;          // Total de semestres possíveis no programa
 
 const temas = {
   claro: {
@@ -94,10 +98,13 @@ const temas = {
 const DIA_PARA_JS = { Dom: 0, Seg: 1, Ter: 2, Qua: 3, Qui: 4, Sex: 5, 'Sáb': 6 };
 const LIMITE_NOTIFICACAO_MS = 2 * 60 * 60 * 1000; // 2 horas
 
+// Retorna a data/hora atual ajustada para o fuso de Brasília (UTC-3)
 function agoraBrasilia() {
   return new Date(Date.now() - 3 * 60 * 60 * 1000);
 }
 
+// Retorna uma string identificadora da semana atual no formato "aaaa-SNN"
+// Usada para controlar a meta semanal de caronas
 function obterSemanaAtual() {
   const agora = agoraBrasilia();
   const inicioAno = new Date(Date.UTC(agora.getUTCFullYear(), 0, 1));
@@ -105,6 +112,9 @@ function obterSemanaAtual() {
   return `${agora.getUTCFullYear()}-S${Math.floor(diaDoAno / 7)}`;
 }
 
+// Calcula os delays (em ms) para disparar as notificações de uma carona confirmada.
+// Só funciona se a carona for hoje e estiver dentro da janela de 2 horas.
+// Retorna null se o dia não for hoje ou se a carona já passou / está muito distante.
 function calcularDelaysNotificacao(horario, diaSelecionado) {
   if (!diaSelecionado || !horario) return null;
 
@@ -202,30 +212,37 @@ export function CaronaProvider({ children }) {
     },
   ]);
 
+  // Autentica o usuário com os dados fornecidos (simulação sem back-end)
   function login(dados) {
     setUsuario({ senha: '123456', ...dados });
   }
 
+  // Remove o usuário autenticado (encerra a sessão)
   function logout() {
     setUsuario(null);
   }
 
+  // Alterna entre tema claro e escuro
   function toggleTema() {
     setTemaAtual(prev => (prev === 'claro' ? 'escuro' : 'claro'));
   }
 
+  // Atualiza o raio de busca de caronas em quilômetros
   function atualizarRaioBusca(km) {
     setRaioBuscaState(km);
   }
 
+  // Atualiza nome e curso do usuário logado
   function atualizarPerfil({ nome, curso }) {
     setUsuario(prev => ({ ...prev, nome, curso }));
   }
 
+  // Atualiza o e-mail do usuário logado
   function alterarEmail(novoEmail) {
     setUsuario(prev => ({ ...prev, email: novoEmail }));
   }
 
+  // Verifica a senha atual antes de permitir a alteração
   function alterarSenha(senhaAtual, novaSenha) {
     if (usuario?.senha !== senhaAtual) {
       return { ok: false, mensagem: 'Senha atual incorreta.' };
@@ -234,24 +251,30 @@ export function CaronaProvider({ children }) {
     return { ok: true };
   }
 
+  // Remove todos os dados do usuário (simulação — em produção excluiria do banco)
   function excluirConta() {
     logout();
   }
 
+  // Cria uma nova notificação e a coloca na fila para exibição no overlay
   function adicionarNotificacao(dados) {
     const nova = { id: Date.now(), ...dados, lida: false, tempo: new Date() };
     setNotificacoes(prev => [nova, ...prev]);
     setNotificacaoPendente(nova);
   }
 
+  // Remove a notificação do overlay somente se ainda for a mesma (evita race condition)
   function limparNotificacaoPendente(idDismissed) {
     setNotificacaoPendente(prev => (prev?.id === idDismissed ? null : prev));
   }
 
+  // Marca todas as notificações como lidas (remove o indicador de não lida)
   function marcarTodasLidas() {
     setNotificacoes(prev => prev.map(n => ({ ...n, lida: true })));
   }
 
+  // Incrementa o contador de caronas do semestre e da semana atual.
+  // Reinicia o contador semanal quando detecta uma nova semana.
   function registrarHoraComplementar() {
     const semanaAtual = obterSemanaAtual();
     setProgressoHoras(prev => {
@@ -269,6 +292,7 @@ export function CaronaProvider({ children }) {
     });
   }
 
+  // Registra o resgate de horas complementares do semestre atual e avança para o próximo
   function resgatarHoras() {
     setProgressoHoras(prev => {
       if (prev.caronasSemestre < CARONAS_POR_SEMESTRE) return prev;
@@ -282,6 +306,8 @@ export function CaronaProvider({ children }) {
     });
   }
 
+  // Move a carona para o histórico, remove das confirmadas e abre a avaliação.
+  // Se a carona for gratuita (tipo 'horas'), registra a hora complementar.
   function concluirCarona(id) {
     const carona = caronas.find(c => c.id === id);
     setCaronasConfirmadas(prev => prev.filter(cId => cId !== id));
@@ -294,6 +320,7 @@ export function CaronaProvider({ children }) {
     }
   }
 
+  // Salva a avaliação (nota de 1 a 5) e fecha o modal de avaliação
   function avaliarCarona(id, nota) {
     setAvaliacoes(prev => ({ ...prev, [id]: nota }));
     setAvaliacaoPendente(null);
@@ -303,6 +330,7 @@ export function CaronaProvider({ children }) {
     setAvaliacaoPendente(null);
   }
 
+  // Adiciona a mensagem do usuário ao chat e simula uma resposta automática do motorista
   function enviarMensagem(caronaId, texto) {
     const hora = new Date();
     const novaMinha = { id: Date.now(), texto, remetente: 'eu', horario: hora };
@@ -331,10 +359,13 @@ export function CaronaProvider({ children }) {
     }, 2000 + Math.random() * 2000);
   }
 
+  // Adiciona uma nova carona à lista global com ID gerado pelo timestamp
   function publicarCarona(carona) {
     setCaronas(prev => [...prev, { id: Date.now(), ...carona }]);
   }
 
+  // Confirma a reserva: adiciona às confirmadas, reduz uma vaga, envia mensagem
+  // inicial do motorista no chat e agenda as notificações de progresso da carona.
   function confirmarCarona(id, diaSelecionado) {
     const carona = caronas.find(c => c.id === id);
     const nomeMotorista = carona?.nome ?? 'Motorista';
@@ -387,6 +418,7 @@ export function CaronaProvider({ children }) {
     }, delays.concluida);
   }
 
+  // Cancela a reserva e devolve a vaga à carona
   function cancelarCarona(id) {
     setCaronasConfirmadas(prev => prev.filter(cId => cId !== id));
     setCaronas(prev =>

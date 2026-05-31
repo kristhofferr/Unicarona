@@ -1,3 +1,6 @@
+// Tela de edição do perfil do usuário.
+// Permite alterar nome, curso, e-mail institucional e senha.
+// A exclusão de conta é feita via modal de confirmação com aviso de ação irreversível.
 import React, { useState } from 'react';
 import {
   View,
@@ -56,6 +59,7 @@ export default function EditarPerfilScreen({ navigation }) {
     setFeedback(prev => ({ id: prev.id + 1, visivel: true, mensagem, tipo }));
   }
 
+  // Valida e salva nome e curso do usuário
   function salvarPerfil() {
     if (!nome.trim()) {
       mostrar('O nome não pode estar vazio.', 'erro');
@@ -65,6 +69,7 @@ export default function EditarPerfilScreen({ navigation }) {
     mostrar('Perfil atualizado com sucesso.', 'sucesso');
   }
 
+  // Valida o domínio institucional e atualiza o e-mail do usuário
   function salvarEmail() {
     if (!novoEmail.trim()) {
       mostrar('Informe o novo e-mail.', 'erro');
@@ -80,6 +85,7 @@ export default function EditarPerfilScreen({ navigation }) {
     mostrar('E-mail atualizado com sucesso.', 'sucesso');
   }
 
+  // Verifica senha atual, mínimo de 6 caracteres e confirmação antes de atualizar
   function salvarSenha() {
     if (!senhaAtual || !novaSenha || !confirmaSenha) {
       mostrar('Preencha todos os campos de senha.', 'erro');

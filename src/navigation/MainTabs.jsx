@@ -1,3 +1,6 @@
+// Define a barra de abas inferior com 4 seções: Caronas, Reservas, Notificações e Perfil.
+// As cores são aplicadas dinamicamente conforme o tema claro/escuro ativo.
+// Exibe badge com contagem de notificações não lidas na aba de Notificações.
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';

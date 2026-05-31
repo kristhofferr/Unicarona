@@ -1,4 +1,7 @@
 
+// Tela de login do aplicativo Unicarona.
+// Valida e-mail institucional (deve terminar em .edu.br) e RA (8 dígitos numéricos).
+// Após validação bem-sucedida, autentica o usuário via contexto global.
 import React, { useState } from 'react';
 import {
   View,
@@ -22,15 +25,18 @@ export default function LoginScreen({ navigation }) {
     setFeedback(prev => ({ id: prev.id + 1, visivel: true, mensagem, tipo: 'erro' }));
   }
 
+  // Verifica se o e-mail é de domínio institucional (contém 'edu' e termina em '.br')
   function validarEmail(email) {
     const dominio = email.split('@')[1] || '';
     return dominio.includes('edu') && dominio.endsWith('.br');
   }
 
+  // Valida que o RA (Registro Acadêmico) possui exatamente 8 dígitos numéricos
   function validarSenha(senha) {
     return /^\d{8}$/.test(senha);
   }
 
+  // Executa as validações e autentica o usuário em caso de sucesso
   function handleLogin() {
     if (!email || !senha) {
       mostrar('Preencha todos os campos.');

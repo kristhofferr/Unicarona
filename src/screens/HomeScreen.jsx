@@ -1,4 +1,8 @@
 
+// Tela principal (Home) do aplicativo Unicarona.
+// Exibe a lista de caronas disponíveis com filtro por dia da semana,
+// botões de acesso rápido para buscar/oferecer carona e ver o mapa.
+// Permite confirmar uma carona através de um modal detalhado.
 import React, { useState } from 'react';
 import {
   View,
@@ -21,6 +25,7 @@ export default function HomeScreen({ navigation }) {
   const [diaSelecionado, setDiaSelecionado] = useState(null);
   const [feedback, setFeedback] = useState({ id: 0, visivel: false, mensagem: '', tipo: 'sucesso' });
 
+  // Abre o modal de confirmação. Pré-seleciona o dia se a carona tiver apenas um dia disponível
   function abrirModal(carona) {
     const diasDaCarona = carona.dias ?? [];
     const preSelect = diasDaCarona.length === 1 ? diasDaCarona[0] : null;
@@ -28,15 +33,18 @@ export default function HomeScreen({ navigation }) {
     setModalCarona(carona);
   }
 
+  // Fecha o modal e limpa a seleção de dia
   function fecharModal() {
     setModalCarona(null);
     setDiaSelecionado(null);
   }
 
+  // Exibe mensagem de feedback no topo da tela (sucesso ou erro)
   function mostrar(mensagem, tipo = 'sucesso') {
     setFeedback(prev => ({ id: prev.id + 1, visivel: true, mensagem, tipo }));
   }
 
+  // Confirma a reserva da carona e exibe mensagem de sucesso
   function handleConfirmarModal() {
     confirmarCarona(modalCarona.id, diaSelecionado);
     const nome = modalCarona.nome;
@@ -45,6 +53,7 @@ export default function HomeScreen({ navigation }) {
     mostrar(`Carona com ${nome}${dia} confirmada!`);
   }
 
+  // Filtra caronas pelo dia selecionado. Se nenhum filtro ativo, exibe todas
   const caronasVisiveis = caronas.filter(c => {
     const diaOk = diaFiltro ? (!c.dias || c.dias.includes(diaFiltro)) : true;
     return diaOk;

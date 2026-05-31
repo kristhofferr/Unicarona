@@ -1,4 +1,7 @@
 
+// Tela de busca de caronas com filtros por origem, destino, horário e dia da semana.
+// Os resultados são atualizados automaticamente conforme o usuário digita.
+// Permite confirmar uma carona diretamente pelo modal de detalhes.
 import React, { useState, useEffect } from 'react';
 import {
   View,
@@ -37,6 +40,7 @@ export default function BuscarCaronaScreen({ navigation }) {
     aplicarFiltro();
   }, [origem, destino, horarioFiltro, diaFiltro, caronas]);
 
+  // Filtra a lista de caronas comparando cada campo com os filtros ativos
   function aplicarFiltro() {
     const origemNorm = normalizarTexto(origem);
     const destinoNorm = normalizarTexto(destino);
@@ -52,6 +56,7 @@ export default function BuscarCaronaScreen({ navigation }) {
     setCaronasFiltradas(filtradas);
   }
 
+  // Limpa todos os campos de filtro e volta a exibir todas as caronas
   function handleLimpar() {
     setOrigem('');
     setDestino('');

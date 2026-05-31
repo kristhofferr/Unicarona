@@ -1,3 +1,6 @@
+// Overlay global que exibe notificações em tempo real no topo da tela.
+// Cada notificação anima sua entrada com efeito spring vindo de cima
+// e some automaticamente após 4 segundos ou ao clicar no X.
 import React, { useEffect, useRef } from 'react';
 import { Animated, Text, StyleSheet, TouchableOpacity, View, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
@@ -9,21 +12,27 @@ const CONFIG = {
   'star':             { cor: '#D97706', fundo: '#FFFBEB', borda: '#FCD34D' },
 };
 
+// Componente interno que renderiza um card de notificação com animação.
+// Recebe a notificação e o callback para remover da fila ao fechar.
 function NotifCard({ notif, onDismiss }) {
   const notifId = notif.id;
+  // Animação de entrada: desloca de -130 (acima da tela) para 0
   const translateY = useRef(new Animated.Value(-130)).current;
   const opacidade = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
+    // Entrada com spring para efeito mais natural
     Animated.parallel([
       Animated.spring(translateY, { toValue: 0, useNativeDriver: true, tension: 75, friction: 11 }),
       Animated.timing(opacidade, { toValue: 1, duration: 220, useNativeDriver: true }),
     ]).start();
 
+    // Remove a notificação automaticamente após 4 segundos
     const timer = setTimeout(fechar, 4000);
     return () => clearTimeout(timer);
   }, []);
 
+  // Anima a saída e notifica o contexto para remover da fila
   function fechar() {
     Animated.parallel([
       Animated.timing(translateY, { toValue: -130, duration: 280, useNativeDriver: true }),

@@ -1,3 +1,6 @@
+// Tela de chat entre o passageiro e o motorista de uma carona confirmada.
+// As mensagens do usuário aparecem à direita (balão vermelho) e as do
+// motorista à esquerda (balão cinza). O motorista responde automaticamente.
 import React, { useState, useRef, useEffect } from 'react';
 import {
   View,
@@ -31,6 +34,7 @@ export default function ChatScreen({ navigation, route }) {
     }
   }, [msgs.length]);
 
+  // Envia a mensagem digitada e limpa o campo de texto
   function handleEnviar() {
     const t = texto.trim();
     if (!t) return;

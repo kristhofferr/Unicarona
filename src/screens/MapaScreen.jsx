@@ -1,3 +1,6 @@
+// Tela de mapa interativo com a localização dos motoristas disponíveis.
+// Solicita permissão de localização do dispositivo e centraliza o mapa
+// na posição do usuário. Ao clicar em um marcador, exibe a rota da carona.
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ActivityIndicator, TouchableOpacity } from 'react-native';
 import MapView, { Marker, Polyline } from 'react-native-maps';
@@ -14,6 +17,7 @@ export default function MapaScreen() {
   const [carregandoRota, setCarregandoRota] = useState(false);
   const { caronas } = useCarona();
 
+  // Busca a rota entre origem e destino da carona usando a API OSRM (OpenStreetMap)
   async function buscarRota(carona) {
     if (!carona.latitudeDestino || !carona.longitudeDestino) return;
     setCarregandoRota(true);
@@ -35,6 +39,7 @@ export default function MapaScreen() {
   }
 
   useEffect(() => {
+    // Solicita permissão e obtém a localização atual ao montar a tela
     async function obterLocalizacao() {
       try {
         const { status } = await Location.requestForegroundPermissionsAsync();

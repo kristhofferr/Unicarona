@@ -1,3 +1,7 @@
+// Tela para o usuário oferecer uma carona.
+// Funciona em 2 etapas: (1) preenchimento do formulário com dados da rota,
+// (2) visualização da rota no mapa antes de confirmar a publicação.
+// Geocodifica os endereços via Nominatim (OpenStreetMap) e traça a rota com OSRM.
 import React, { useState } from 'react';
 import {
   View, Text, TextInput, StyleSheet, ScrollView,
@@ -33,16 +37,20 @@ export default function OfereceCaronaScreen({ navigation }) {
   const [rota, setRota] = useState([]);
   const [feedback, setFeedback] = useState({ id: 0, visivel: false, mensagem: '', tipo: 'sucesso' });
 
+  // Exibe mensagem de feedback no topo da tela
   function mostrar(mensagem, tipo) {
     setFeedback(prev => ({ id: prev.id + 1, visivel: true, mensagem, tipo }));
   }
 
+  // Adiciona ou remove um dia da lista de dias disponíveis da carona
   function toggleDia(dia) {
     setDiasSelecionados(prev =>
       prev.includes(dia) ? prev.filter(d => d !== dia) : [...prev, dia]
     );
   }
 
+  // Converte um endereço em coordenadas geográficas.
+  // Primeiro tenta nos lugares conhecidos locais, depois usa a API Nominatim.
   async function geocodificar(texto) {
     const conhecido = buscarLugarConhecido(texto);
     if (conhecido) return { latitude: conhecido.latitude, longitude: conhecido.longitude };
@@ -80,6 +88,7 @@ export default function OfereceCaronaScreen({ navigation }) {
     return null;
   }
 
+  // Busca os pontos da rota entre dois pares de coordenadas usando a API OSRM
   async function buscarRota(cOrigem, cDestino) {
     const url = `https://router.project-osrm.org/route/v1/driving/${cOrigem.longitude},${cOrigem.latitude};${cDestino.longitude},${cDestino.latitude}?overview=full&geometries=geojson`;
     const res = await fetch(url);
@@ -90,6 +99,7 @@ export default function OfereceCaronaScreen({ navigation }) {
     }));
   }
 
+  // Valida campos, geocodifica os endereços e avança para a etapa do mapa
   async function handleAvancar() {
     if (!origem || !horario || !vagas || !veiculo) {
       mostrar('Preencha todos os campos antes de continuar.', 'erro');
@@ -121,6 +131,7 @@ export default function OfereceCaronaScreen({ navigation }) {
     }
   }
 
+  // Publica a carona no contexto global e navega de volta à tela anterior
   function handlePublicar() {
     publicarCarona({
       nome: usuario?.nome ?? 'Motorista',
@@ -147,6 +158,7 @@ export default function OfereceCaronaScreen({ navigation }) {
     navigation.goBack();
   }
 
+  // Retorna à etapa 1 e limpa os dados de rota calculados
   function handleVoltar() {
     setEtapa(1);
     setErroRota('');

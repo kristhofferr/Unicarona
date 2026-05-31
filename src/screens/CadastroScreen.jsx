@@ -1,4 +1,7 @@
 
+// Tela de cadastro de novo usuário no Unicarona.
+// Valida e-mail institucional, força mínimo de 6 caracteres na senha
+// e confirma que as senhas digitadas são iguais antes de criar a conta.
 import React, { useState } from 'react';
 import {
   View,
@@ -27,14 +30,17 @@ export default function CadastroScreen({ navigation }) {
     setFeedback(prev => ({ id: prev.id + 1, visivel: true, mensagem, tipo: 'erro' }));
   }
 
+  // Verifica se o e-mail termina com domínio institucional (.edu.br)
   function validarEmail(email) {
     return email.endsWith('.edu.br');
   }
 
+  // Exige senha com pelo menos 6 caracteres
   function validarSenha(senha) {
     return senha.length >= 6;
   }
 
+  // Valida todos os campos e cria a conta do usuário se tudo estiver correto
   function handleCadastro() {
     if (!nome || !email || !curso || !ra || !senha || !confirmaSenha) {
       mostrar('Preencha todos os campos.');

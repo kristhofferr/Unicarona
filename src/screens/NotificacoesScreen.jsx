@@ -1,3 +1,6 @@
+// Tela de notificações do usuário.
+// Exibe todas as notificações recebidas (confirmações de carona, avaliações etc).
+// Marca todas como lidas automaticamente 600ms após a tela ser aberta.
 import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';

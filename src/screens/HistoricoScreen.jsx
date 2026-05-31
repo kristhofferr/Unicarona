@@ -1,9 +1,13 @@
+// Tela de histórico de caronas concluídas pelo usuário.
+// Exibe as caronas em ordem cronológica inversa (mais recentes primeiro)
+// junto com a avaliação (estrelas) dada a cada motorista.
 import React from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useCarona } from '../context/CaronaContext';
 import Header from '../components/Header';
 
+// Formata um objeto Date para o padrão brasileiro dd/mm/aaaa
 function formatarData(data) {
   const d = new Date(data);
   return `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}`;

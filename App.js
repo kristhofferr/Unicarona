@@ -1,3 +1,6 @@
+// Componente raiz do aplicativo Unicarona.
+// Envolve toda a aplicação com o CaronaProvider (estado global) e
+// registra os overlays globais de notificação e avaliação de carona.
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { CaronaProvider } from './src/context/CaronaContext';

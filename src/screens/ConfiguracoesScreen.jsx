@@ -1,3 +1,5 @@
+// Tela de configurações do aplicativo.
+// Permite alternar entre tema claro e escuro e definir o raio de busca de caronas (em km).
 import React, { useState } from 'react';
 import {
   View,
@@ -22,6 +24,7 @@ export default function ConfiguracoesScreen() {
     setFeedback(prev => ({ id: prev.id + 1, visivel: true, mensagem, tipo }));
   }
 
+  // Valida que o raio está entre 1 e 500 km antes de salvar
   function salvarRaio() {
     const km = parseInt(raioTemp, 10);
     if (isNaN(km) || km < 1 || km > 500) {
