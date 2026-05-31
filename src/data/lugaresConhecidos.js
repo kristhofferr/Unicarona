@@ -1,4 +1,3 @@
-// Coordenadas verificadas de locais comuns em Francisco Beltrão - PR
 export const lugaresConhecidos = [
   { nome: 'UNIPAR', latitude: -26.0920, longitude: -53.0516 },
   { nome: 'Unipar', latitude: -26.0920, longitude: -53.0516 },

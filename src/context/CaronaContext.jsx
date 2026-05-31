@@ -92,7 +92,7 @@ const temas = {
 };
 
 const DIA_PARA_JS = { Dom: 0, Seg: 1, Ter: 2, Qua: 3, Qui: 4, Sex: 5, 'Sáb': 6 };
-const LIMITE_NOTIFICACAO_MS = 2 * 60 * 60 * 1000; // 2 horas
+const LIMITE_NOTIFICACAO_MS = 2 * 60 * 60 * 1000;
 
 function agoraBrasilia() {
   return new Date(Date.now() - 3 * 60 * 60 * 1000);
@@ -110,7 +110,6 @@ function calcularDelaysNotificacao(horario, diaSelecionado) {
 
   const brasilia = agoraBrasilia();
 
-  // getUTCDay/getUTCHours/getUTCMinutes no objeto deslocado == horário local de Brasília
   if (DIA_PARA_JS[diaSelecionado] !== brasilia.getUTCDay()) return null;
 
   const [horasCarona, minutosCarona] = horario.split(':').map(Number);
@@ -124,9 +123,9 @@ function calcularDelaysNotificacao(horario, diaSelecionado) {
   if (msAteCarona > LIMITE_NOTIFICACAO_MS) return null;
 
   return {
-    aCaminho:  Math.max(15_000, msAteCarona - 30_000), // 30s antes do horário
-    chegou:    Math.max(25_000, msAteCarona - 15_000), // 15s após "a caminho"
-    concluida: Math.max(35_000, msAteCarona -  5_000), // 10s após "chegou"
+    aCaminho:  Math.max(15_000, msAteCarona - 30_000),
+    chegou:    Math.max(25_000, msAteCarona - 15_000),
+    concluida: Math.max(35_000, msAteCarona -  5_000),
   };
 }
 
@@ -354,14 +353,12 @@ export function CaronaProvider({ children }) {
       ],
     }));
 
-    // Sempre dispara confirmação 10s após reservar
     setTimeout(() => adicionarNotificacao({
       titulo: 'Carona confirmada!',
       mensagem: `${nomeMotorista} confirmou sua solicitação de carona.`,
       icone: 'checkmark-circle',
     }), 10_000);
 
-    // As demais notificações só disparam se for hoje e dentro da janela de 2h
     const delays = calcularDelaysNotificacao(carona?.horario ?? '', diaSelecionado);
     if (!delays) return;
 

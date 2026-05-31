@@ -28,7 +28,6 @@ export default function MapaScreen() {
       }));
       setRota(coords);
     } catch {
-      // sem rota disponível
     } finally {
       setCarregandoRota(false);
     }

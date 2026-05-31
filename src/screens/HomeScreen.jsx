@@ -113,7 +113,7 @@ export default function HomeScreen({ navigation }) {
         <View style={styles.secao}>
           <Text style={[styles.secaoTitulo, { color: tema.darkText }]}>Caronas Disponíveis</Text>
 
-          {/* Filtro por dias */}
+
           <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.diasScroll}>
             <TouchableOpacity
               style={[
@@ -245,7 +245,7 @@ export default function HomeScreen({ navigation }) {
 
       </ScrollView>
 
-      {/* Modal de confirmação */}
+
       <Modal visible={!!modalCarona} transparent animationType="fade">
         <View style={styles.modalOverlay}>
           <View style={[styles.modalBox, { backgroundColor: tema.darkCard, borderColor: tema.darkBorder }]}>
@@ -262,7 +262,7 @@ export default function HomeScreen({ navigation }) {
                   </Text>
                 </View>
 
-                {/* Seleção de dia */}
+
                 {!caronasConfirmadas.includes(modalCarona.id) && modalCarona.vagas > 0 && modalCarona.dias && modalCarona.dias.length > 0 && (
                   <View style={styles.modalDiasContainer}>
                     <Text style={[styles.modalDiasLabel, { color: tema.darkText }]}>

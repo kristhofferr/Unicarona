@@ -47,7 +47,6 @@ export default function LoginScreen({ navigation }) {
       return;
     }
 
-    // simula login sem back-end
     login({
       nome: email.split('@')[0],
       email,

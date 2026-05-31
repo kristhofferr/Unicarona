@@ -56,7 +56,6 @@ export default function CadastroScreen({ navigation }) {
       return;
     }
 
-    // simula cadastro e já loga o usuário
     login({
       nome,
       email,

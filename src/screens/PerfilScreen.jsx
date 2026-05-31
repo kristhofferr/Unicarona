@@ -81,7 +81,7 @@ export default function PerfilScreen({ navigation }) {
       )}
 
       <ScrollView>
-        {/* Avatar */}
+
         <View style={[styles.avatarContainer, { backgroundColor: tema.card, borderBottomColor: tema.border }]}>
           <View style={[styles.avatar, { backgroundColor: tema.avatarBackground }]}>
             <Ionicons name="person" size={48} color={tema.avatarIcon} />
@@ -93,7 +93,7 @@ export default function PerfilScreen({ navigation }) {
           ) : null}
         </View>
 
-        {/* Horas Complementares */}
+
         <Text style={[styles.secaoTitulo, { color: tema.textSecondary }]}>HORAS COMPLEMENTARES</Text>
         <View style={[styles.horasCard, { backgroundColor: tema.card, borderColor: tema.border }]}>
 
@@ -116,7 +116,7 @@ export default function PerfilScreen({ navigation }) {
                 </Text>
               </View>
 
-              {/* Barra semestre */}
+
               <View style={[styles.progressBarBg, { backgroundColor: tema.border }]}>
                 <View style={[styles.progressBarFg, { width: `${pctSemestre * 100}%`, backgroundColor: tema.accent }]} />
               </View>
@@ -130,7 +130,7 @@ export default function PerfilScreen({ navigation }) {
                 </Text>
               </View>
 
-              {/* Meta semanal */}
+
               <View style={[styles.metaContainer, { borderTopColor: tema.border }]}>
                 <View style={styles.metaHeader}>
                   <Ionicons name="flag-outline" size={14} color={tema.textSecondary} />
@@ -160,7 +160,7 @@ export default function PerfilScreen({ navigation }) {
           )}
         </View>
 
-        {/* Opções */}
+
         <Text style={[styles.secaoTitulo, { color: tema.textSecondary }]}>PERFIL</Text>
         <View style={[styles.opcoes, { backgroundColor: tema.card, borderColor: tema.border }]}>
           <OpcaoPerfil
@@ -220,7 +220,7 @@ export default function PerfilScreen({ navigation }) {
         <View style={styles.rodape} />
       </ScrollView>
 
-      {/* Modal de logout */}
+
       <Modal visible={modalLogout} transparent animationType="fade">
         <View style={styles.modalOverlay}>
           <View style={[styles.modalBox, { backgroundColor: tema.card, borderColor: tema.border }]}>
@@ -249,7 +249,7 @@ export default function PerfilScreen({ navigation }) {
         </View>
       </Modal>
 
-      {/* Modal de resgatar horas */}
+
       <Modal visible={modalResgatar} transparent animationType="fade">
         <View style={styles.modalOverlay}>
           <View style={[styles.modalBox, { backgroundColor: tema.card, borderColor: tema.border }]}>
